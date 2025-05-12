@@ -32,3 +32,15 @@ module uart_loopback (
 
     // Loopback control logic
     always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            tx_start <= 0;
+        end else begin
+            if (rx_done && !tx_busy) begin
+                tx_data  <= rx_data;
+                tx_start <= 1;
+            end else begin
+                tx_start <= 0;
+            end
+        end
+    end
+endmodule
