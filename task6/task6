@@ -1,1 +1,56 @@
+module motor_control (
+    input clk,
+    input up,
+    input down,
+    output reg motor_a,
+    output reg motor_b
+);
+
+always @(posedge clk) begin
+    if (up && !down) begin
+        // Rotate motor in upward direction
+        motor_a <= 1;
+        motor_b <= 0;
+    end
+    else if (!up && down) begin
+        // Rotate motor in downward direction
+        motor_a <= 0;
+        motor_b <= 1;
+    end
+    else begin
+        // Stop motor
+        motor_a <= 0;
+        motor_b <= 0;
+    end
+end
+
+endmodule
+module motor_control_tb;
+
+reg clk = 0;
+reg up = 0;
+reg down = 0;
+wire motor_a;
+wire motor_b;
+
+motor_control uut (
+    .clk(clk),
+    .up(up),
+    .down(down),
+    .motor_a(motor_a),
+    .motor_b(motor_b)
+);
+
+always #5 clk = ~clk;
+
+initial begin
+    up = 0; down = 0; #20;
+    up = 1; down = 0; #40;
+    up = 0; down = 0; #20;
+    up = 0; down = 1; #40;
+    up = 1; down = 1; #20;
+    $stop;
+end
+
+endmodule
 
