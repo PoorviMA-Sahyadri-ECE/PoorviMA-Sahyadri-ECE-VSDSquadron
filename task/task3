@@ -1,1 +1,34 @@
+module uart_loopback (
+    input  wire clk,       // System clock
+    input  wire rst,       // Reset signal
+    input  wire rx,        // UART receive input
+    output wire tx         // UART transmit output
+);
 
+    wire [7:0] rx_data;
+    wire       rx_done;
+    reg        tx_start;
+    reg [7:0]  tx_data;
+    wire       tx_busy;
+
+    // UART Receiver Module
+    uart_rx receiver (
+        .clk(clk),
+        .rst(rst),
+        .rx(rx),
+        .rx_data(rx_data),
+        .rx_done(rx_done)
+    );
+
+    // UART Transmitter Module
+    uart_tx transmitter (
+        .clk(clk),
+        .rst(rst),
+        .tx_start(tx_start),
+        .tx_data(tx_data),
+        .tx(tx),
+        .tx_busy(tx_busy)
+    );
+
+    // Loopback control logic
+    always @(posedge clk or posedge rst) begin
