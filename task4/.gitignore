@@ -1,1 +1,6 @@
-
+**/*.blif 
+**/*.asc 
+**/*.bin 
+**/*.json
+**/*.timings
+**/*.out
