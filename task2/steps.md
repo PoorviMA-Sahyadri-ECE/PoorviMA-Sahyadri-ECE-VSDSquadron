@@ -1,7 +1,7 @@
 # Steps:
 
 ## Study the Existing Code:
-1. Access the uart_loopback project from the VSDSquadron_FM repository.
+1. Access the uart_loopback project from the [VSDSquadron_FM repository](https://github.com/thesourcerer8/VSDSquadron_FM/blob/main/uart_loopback/uart_trx.v).
 2. Analyze the Verilog code to understand the loopback logic.
 
 ---
