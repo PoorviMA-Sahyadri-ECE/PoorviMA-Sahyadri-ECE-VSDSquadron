@@ -82,27 +82,12 @@ Now if you get error as shown below then probably the board got disconnected.
 
 ![VirtualBox_FPGA_20_03_2025_16_35_57](https://github.com/user-attachments/assets/2f608b07-8c47-4fcd-94bd-c04414db1b59)
 
-Try repeating the step as shown.
 
-– On the Virtual Machine, click on ”Devices → USB → FTDI Single RS232-HS [J900]” as
-shown
-
-![image](https://github.com/user-attachments/assets/2624f754-49f7-42eb-85dd-471c2ae114f0)
-
-Now write the command again
-
-```bash
-sudo make flash
-```
 
 It will take around 2.5 minute so be calm. and after the output will be this as shown
 
 ![VirtualBox_FPGA_20_03_2025_16_41_20](https://github.com/user-attachments/assets/eb964c53-8b7a-4969-960c-7f81b55cfca4)
 
-Once the code is successfully flashed, you will see the RGB lights on the FPGA board
-blinking as shown
-
-https://github.com/user-attachments/assets/5b652545-6f92-4a2a-ab69-ff5f9841f86c
 
 **And your first program is done**
 
