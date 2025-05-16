@@ -35,7 +35,8 @@ FPGA Mini (FM) board, we need to make sure that the board is connected to the Or
 Virtual Machine. Perform below steps
 – Connect the board to your PC, as shown.
 
-![[image](https://github.com/user-attachments/assets/d4489365-85aa-455d-bb44-42f7cc1b1533)
+![[image](![Uploading image.jpeg…]()
+)
 ](https://github.com/user-attachments/assets/253b9538-d820-418a-bbd3-6668f00abbf9)
 
 – On the Virtual Machine, click on ”Devices → USB → FTDI Single RS232-HS [J900]” as
