@@ -37,6 +37,7 @@ This repository contains RTL designs, simulations, and programming tasks created
 
 ## 📝 Repository Structure
 VSDSquadron-FPGA-Mini-board/
+
 ├── Part 1 Setup.md # Instructions for initial board setup
 ├── Part 2 First project.md # Steps for your first FPGA project
 ├── Part 3 Task given through Gmail.md # Additional task descriptions and implementations
@@ -74,11 +75,6 @@ No external hardware needed other than a USB-UART cable
 
 Loopback logic wires TX directly to RX in code
 ---
-#Block Diagram
-lua
-Copy
-Edit
-
 Test Procedure
 Connect FPGA via USB
 
@@ -90,10 +86,12 @@ Type characters — same characters should echo back
 Project 2: UART Transmitter
 ---
 Objective
+
 Develop a UART TX module that transmits constant or programmed data.
 
 Test Procedure
 Serial terminal receives data from FPGA (e.g., “Hello UART”)
+
 Ensure data rate, stop bits, and baud rate are matched
 ![output](https://github.com/user-attachments/assets/8c0c5a1b-aa1b-4147-864e-3ba0b606f941)
 
@@ -104,7 +102,7 @@ Objective
 Transmit real-time sensor data via UART.
 
 Hardware
-Sensor (e.g., temperature or light)
+Sensor 
 FPGA board
 
 USB-UART interface
@@ -117,7 +115,6 @@ Project 4: UART-Controlled Display System
 Goal
 Send characters via UART and display them on a 7-segment or LCD module.
 Architecture
-rust
 Copy
 Edit
 Terminal --> FPGA UART RX --> Display Decoder --> 7-Segment/LCD
@@ -131,9 +128,13 @@ Example Commands
 rust
 Copy
 Edit
-Send: "LON"  --> Turns LED ON  
+
+Send: "LON"  --> Turns LED ON 
+
 Send: "LOFF" --> Turns LED OFF
+
 Tools Used
+
 VSDSquadron FPGA Mini Board
 
 Yosys, NextPNR, icestorm tools
@@ -142,31 +143,6 @@ GTKWave for simulation
 
 PuTTY / Minicom for UART communication
 
-#Demo Videos & Screenshots
----
-All demonstration videos and snapshots are located in the thumbnails/ directory.
-
-**Time	Description
-0 sec	Board powered, idle state
-5 sec	UART TX active (data seen)
-10 sec	UART loopback verified
-
-
-How to Run
-bash
-Copy
-Edit
-make clean
-make build
-sudo make flash
-screen /dev/ttyUSBx 9600  # Replace x with your device number
-Ensure the device path matches your FTDI or USB-UART port.
-
-Challenges & Solutions
-Challenge	Solution
-Baud mismatch	Ensured UART settings matched on both sides
-Loopback misread	Added debounce logic to clean noise
-Sensor fluctuation	Averaging filter applied before UART TX
 
 ---
 .
@@ -178,7 +154,10 @@ Thanks to VLSI System Design for providing the FPGA board and learning resources
 👨‍💻 Author
 ---
 Poorvi MA
-GitHub: 
+
+Email:poorvii533@gmail.com
+
+GitHub: https://github.com/PoorviMA-Sahyadri-ECE/PoorviMA-Sahyadri-ECE-VSDSquadron.git
 
 
 
