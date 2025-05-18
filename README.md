@@ -55,6 +55,7 @@ Connect FPGA via USB
 Open a serial terminal (e.g., PuTTY, screen)
 
 Type characters — same characters should echo back
+
 Project 2: UART Transmitter
 ---
 Objective
