@@ -68,6 +68,9 @@ Uses a single UART port for both TX and RX
 
 No external hardware needed other than a USB-UART cable
 
+![WhatsApp Image 2025-05-18 at 12 35 19 PM](https://github.com/user-attachments/assets/5b1f3a27-776b-475c-87cc-cda3bae35c73)
+
+
 ![photo of board](https://github.com/user-attachments/assets/b972e11a-5843-4319-8759-b9a3023e4086)
 
 ![image](https://github.com/user-attachments/assets/255d0845-7820-4f52-8c4c-f15b117fad59)
@@ -113,6 +116,7 @@ Observe terminal output
 Project 4: UART-Controlled Display System
 ---
 Goal
+
 Send characters via UART and display them on a 7-segment or LCD module.
 Architecture
 Copy
@@ -141,7 +145,7 @@ Yosys, NextPNR, icestorm tools
 
 GTKWave for simulation
 
-PuTTY / Minicom for UART communication
+PuTTY  for UART communication
 
 
 ---
@@ -155,7 +159,7 @@ Thanks to VLSI System Design for providing the FPGA board and learning resources
 ---
 Poorvi MA
 
-Email:poorvii533@gmail.com
+Email: poorvii533@gmail.com
 
 GitHub: https://github.com/PoorviMA-Sahyadri-ECE/PoorviMA-Sahyadri-ECE-VSDSquadron.git
 
