@@ -141,10 +141,6 @@ Tools Used
 
 VSDSquadron FPGA Mini Board
 
-Yosys, NextPNR, icestorm tools
-
-GTKWave for simulation
-
 PuTTY  for UART communication
 
 
