@@ -49,14 +49,9 @@ Proceed to Part 2 First project.md to create and run your first FPGA design.
 
 Use Part 3 Task given through Gmail.md for additional tasks and exercises to enhance your skills.
 
+System-level integration with peripherals.
 
 ---
-
-
-
-
-
-System-level integration with peripherals
 
 #Project 1: UART Loopback
 ---
@@ -86,6 +81,8 @@ Open a serial terminal (e.g., PuTTY, screen)
 
 Type characters — same characters should echo back
 
+---
+
 Project 2: UART Transmitter
 ---
 Objective
@@ -98,6 +95,7 @@ Serial terminal receives data from FPGA (e.g., “Hello UART”)
 Ensure data rate, stop bits, and baud rate are matched
 ![output](https://github.com/user-attachments/assets/8c0c5a1b-aa1b-4147-864e-3ba0b606f941)
 
+---
 
 #Project 3: UART TX from Sensor Input
 ---
@@ -112,6 +110,8 @@ USB-UART interface
 Test
 Stimulate the sensor
 Observe terminal output
+
+---
 
 Project 4: UART-Controlled Display System
 ---
