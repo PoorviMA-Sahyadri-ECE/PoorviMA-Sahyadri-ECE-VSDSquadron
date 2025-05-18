@@ -66,10 +66,8 @@ Block Diagram
 lua
 Copy
 Edit
-+---------+      +-----------+
-|  FPGA   | ---> | Terminal  |
-|  UART   |      | (PC/USB)  |
-+---------+      +-----------+
+FPGA UART --> Terminal(PC/USB)
+
 Test Procedure
 Serial terminal receives data from FPGA (e.g., “Hello UART”)
 
@@ -90,10 +88,7 @@ Block Diagram
 ---
 lua
 Copy
-Edit
-+--------+     +---------+     +-----------+
-| Sensor | --> |  FPGA   | --> | Terminal  |
-+--------+     +---------+     +-----------+
+
 Test
 Stimulate the sensor
 
@@ -160,28 +155,28 @@ Sensor fluctuation	Averaging filter applied before UART TX
 css
 Copy
 Edit
-├── uart_loopback/
-│   ├── top.v
-│   ├── Makefile
-│   ├── VSDSquadronFM.pcf
-├── uart_tx/
-│   ├── top.v
-│   ├── Makefile
-├── uart_tx_sense/
-│   ├── top.v
-├── uart_display/
-│   ├── top.v
-├── uart_actuator/
-│   ├── top.v
-├── docs/
-│   ├── Block_Diagrams/
-│   ├── Circuit_Diagrams/
-│   ├── README.md
-├── thumbnails/
-│   ├── demo_loopback.png
-│   ├── demo_tx.png
-│   ├── demo_sensor_tx.png
-└── Makefile
+uart_loopback/
+top.v
+Makefile
+VSDSquadronFM.pcf
+uart_tx/
+top.v
+Makefile
+uart_tx_sense/
+ top.v
+ uart_display/
+ top.v
+ uart_actuator/
+ top.v
+ docs/
+Block_Diagrams/
+Circuit_Diagrams/
+README.md
+thumbnails/
+demo_loopback.png
+ demo_tx.png
+ demo_sensor_tx.png
+ Makefile
 
 
 
