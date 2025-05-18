@@ -54,6 +54,8 @@ Test Procedure
 Connect FPGA via USB
 
 Open a serial terminal (e.g., PuTTY, screen)
+![photo of board](https://github.com/user-attachments/assets/503985a0-1938-4095-9fc1-e2840d8c09c5)
+
 
 Type characters — same characters should echo back
 
@@ -72,6 +74,8 @@ Test Procedure
 Serial terminal receives data from FPGA (e.g., “Hello UART”)
 
 Ensure data rate, stop bits, and baud rate are matched
+![output](https://github.com/user-attachments/assets/8c0c5a1b-aa1b-4147-864e-3ba0b606f941)
+
 
 #Project 3: UART TX from Sensor Input
 ---
