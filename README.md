@@ -83,7 +83,6 @@ Test Procedure
 Connect FPGA via USB
 
 Open a serial terminal (e.g., PuTTY, screen)
-![photo of board](https://github.com/user-attachments/assets/503985a0-1938-4095-9fc1-e2840d8c09c5)
 
 
 Type characters — same characters should echo back
