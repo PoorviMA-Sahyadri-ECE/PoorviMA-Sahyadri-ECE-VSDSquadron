@@ -38,17 +38,18 @@ Uses a single UART port for both TX and RX
 
 No external hardware needed other than a USB-UART cable
 
+![photo of board](https://github.com/user-attachments/assets/b972e11a-5843-4319-8759-b9a3023e4086)
+
+![image](https://github.com/user-attachments/assets/255d0845-7820-4f52-8c4c-f15b117fad59)
+
+
 Loopback logic wires TX directly to RX in code
 ---
 #Block Diagram
 lua
 Copy
 Edit
-     +----------+        +----------+
-TX --|          |        |          |-- RX
-     |  UART TX |--------|  UART RX |
-     +----------+        +----------+
-         FPGA UART Loopback Core
+
 Test Procedure
 Connect FPGA via USB
 
