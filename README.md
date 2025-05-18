@@ -1,30 +1,59 @@
-#VSDSquadron FPGA UART Projects
+# VSDSquadron FPGA Mini Board Projects
+
+ This project showcases various experiments and digital designs implemented on the open-source VSDSquadron FPGA Mini Board. The aim is to explore FPGA development hands-on, deepen understanding of digital design concepts, and practice using both proprietary and open-source EDA tools.
+
 ---
-This repository documents a series of UART-based projects implemented on the VSDSquadron FPGA Mini Board, ranging from basic loopback testing to UART-based actuator and display systems.
 
-#Projects Overview
+##  About the Project
+
+This repository contains RTL designs, simulations, and programming tasks created for the VSDSquadron FPGA Mini Board. It serves as a learning resource and playground for FPGA enthusiasts to experiment with logic circuits, simulation, synthesis, and programming.
+
 ---
-Project	Description
 
-uart_loopback - Transmits and instantly receives the same data to test UART connectivity.
+## ✅ Current Focus
 
-uart_tx - Sends data from FPGA to a PC or serial device using UART.
+- Understanding the architecture of the VSDSquadron FPGA Mini Board  
+- Implementing basic and intermediate logic circuits  
+- Performing simulations and verifying design functionality  
+- Flashing synthesized designs onto the FPGA board for real-world testing  
 
-uart_tx_sense - Transmits sensor data through UART based on real-time inputs.
-
-uart_display -	Receives serial data and displays it on an output device.
-
-uart_actuator - Receives serial commands and controls actuators like LEDs or motors.
-
-#Learning Outcomes
 ---
-Verilog-based UART design
 
-Sensor and actuator interfacing
+## 🛠️ Hardware Specifications
 
-Serial protocol communication
+| Component       | Details                       |
+| --------------- | -----------------------------|
+| **FPGA**        | Gowin GW1N-LV1QN48C6/I5       |
+| **Logic Cells** | 1,152                         |
+| **Block RAM**   | 72 Kbits                      |
+| **GPIO Pins**   | 34                            |
+| **LEDs**        | 8 (including RGB support)     |
+| **Switches**    | 4 Push Buttons                |
+| **Clock**       | 27 MHz Crystal Oscillator     |
+| **Programmer**  | Onboard USB to SPI/I2C Programmer |
+| **USB Type**    | 2.0                           |
 
-FPGA hardware implementation
+---
+
+## 📝 Repository Structure
+VSDSquadron-FPGA-Mini-board/
+├── Part 1 Setup.md # Instructions for initial board setup
+├── Part 2 First project.md # Steps for your first FPGA project
+├── Part 3 Task given through Gmail.md # Additional task descriptions and implementations
+└── README.md # Main project overview
+
+Follow the instructions in Part 1 Setup.md to configure your development environment.
+
+Proceed to Part 2 First project.md to create and run your first FPGA design.
+
+Use Part 3 Task given through Gmail.md for additional tasks and exercises to enhance your skills.
+
+
+---
+
+
+
+
 
 System-level integration with peripherals
 
@@ -64,15 +93,8 @@ Project 2: UART Transmitter
 Objective
 Develop a UART TX module that transmits constant or programmed data.
 
-Block Diagram
-lua
-Copy
-Edit
-FPGA UART --> Terminal(PC/USB)
-
 Test Procedure
 Serial terminal receives data from FPGA (e.g., “Hello UART”)
-
 Ensure data rate, stop bits, and baud rate are matched
 ![output](https://github.com/user-attachments/assets/8c0c5a1b-aa1b-4147-864e-3ba0b606f941)
 
@@ -84,30 +106,23 @@ Transmit real-time sensor data via UART.
 
 Hardware
 Sensor (e.g., temperature or light)
-
 FPGA board
 
 USB-UART interface
-Block Diagram
----
-lua
-Copy
-
 Test
 Stimulate the sensor
-
-Observe terminal output (e.g., ADC values or “Temp: 32C”)
+Observe terminal output
 
 Project 4: UART-Controlled Display System
 ---
 Goal
 Send characters via UART and display them on a 7-segment or LCD module.
-
 Architecture
 rust
 Copy
 Edit
 Terminal --> FPGA UART RX --> Display Decoder --> 7-Segment/LCD
+
 Project 5: UART-Controlled Actuator System
 ---
 Goal
@@ -136,7 +151,7 @@ All demonstration videos and snapshots are located in the thumbnails/ directory.
 0 sec	Board powered, idle state
 5 sec	UART TX active (data seen)
 10 sec	UART loopback verified
-...	...
+
 
 How to Run
 bash
@@ -154,33 +169,22 @@ Baud mismatch	Ensured UART settings matched on both sides
 Loopback misread	Added debounce logic to clean noise
 Sensor fluctuation	Averaging filter applied before UART TX
 
-#Repository Structure
 ---
-css
-Copy
-Edit
-uart_loopback/
-top.v
-Makefile
-VSDSquadronFM.pcf
-uart_tx/
-top.v
-Makefile
-uart_tx_sense/
- top.v
- uart_display/
- top.v
- uart_actuator/
- top.v
- docs/
-Block_Diagrams/
-Circuit_Diagrams/
-README.md
-thumbnails/
-demo_loopback.png
- demo_tx.png
- demo_sensor_tx.png
- Makefile
+.
+
+🙌 Acknowledgements
+---
+Thanks to VLSI System Design for providing the FPGA board and learning resources.
+
+👨‍💻 Author
+---
+Poorvi MA
+GitHub: 
+
+
+
+
+
 
 
 
