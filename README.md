@@ -5,11 +5,17 @@ This repository documents a series of UART-based projects implemented on the VSD
 #Projects Overview
 ---
 Project	Description
-uart_loopback	Transmits and instantly receives the same data to test UART connectivity.
-uart_tx	Sends data from FPGA to a PC or serial device using UART.
-uart_tx_sense	Transmits sensor data through UART based on real-time inputs.
-uart_display	Receives serial data and displays it on an output device.
-uart_actuator	Receives serial commands and controls actuators like LEDs or motors.
+
+uart_loopback - Transmits and instantly receives the same data to test UART connectivity.
+
+uart_tx - Sends data from FPGA to a PC or serial device using UART.
+
+uart_tx_sense - Transmits sensor data through UART based on real-time inputs.
+
+uart_display -	Receives serial data and displays it on an output device.
+
+uart_actuator - Receives serial commands and controls actuators like LEDs or motors.
+
 #Learning Outcomes
 ---
 Verilog-based UART design
