@@ -1,4 +1,4 @@
-##FPGA-Based UART-Controlled Actuator System
+FPGA-Based UART-Controlled Actuator System
 ---
 Overview:
 
@@ -90,7 +90,7 @@ always @(posedge clk) begin
     end
 end
 endmodule
-## FPGA-Based UART-Controlled Display System
+ FPGA-Based UART-Controlled Display System
 ---
 Overview:
 
