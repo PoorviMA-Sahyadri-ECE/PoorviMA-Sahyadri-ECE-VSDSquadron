@@ -93,7 +93,7 @@ Test Procedure
 Serial terminal receives data from FPGA (e.g., “Hello UART”)
 
 Ensure data rate, stop bits, and baud rate are matched
-![output](https://github.com/user-attachments/assets/8c0c5a1b-aa1b-4147-864e-3ba0b606f941)
+
 
 ---
 
