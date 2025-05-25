@@ -1,134 +1,190 @@
-Theme 1: FPGA-Based UART-Controlled Display System
-
-Project Overview
-This project focuses on designing and implementing a real-time data visualization system using an FPGA. The primary goal is to receive serial data through UART from a host device (like a PC or microcontroller), process the data, and display it on an output device, such as a 7-segment display or an LCD. The project emphasizes reliable UART communication, efficient data decoding, and real-time display updates.
-
-Objectives
-
-Implement a UART receiver logic on an FPGA (Rx-only).
-
-Decode incoming data (ASCII/hex) to displayable characters.
-
-Interface with a 7-segment display or LCD module.
-
-Optionally, develop a user interface on a PC terminal.
-
-Achieve reliable real-time data reception and display.
-
-
-System Requirements
-
-Hardware:
-
-VSDSquadron FPGA mini
-
-7-segment display module or LCD
-
-
-Software:
-
-Ubuntu
-
-Docklight
-
-
-Functional Description
-
-1. The UART module receives serial data from a host device.
-
-
-2. The received data is buffered and checked for validity.
-
-
-3. ASCII characters (like '0'–'9') are decoded into binary format.
-
-
-4. The converted data is sent to the display driver.
-
-
-5. The display driver updates the output in real time on the 7-segment display or LCD.
-
-
-
-Architecture Diagram
-
-[PC/Microcontroller] -> [UART TX] -> [FPGA UART RX] -> [Data Decoder] -> [Display Driver] -> [7-Segment/LCD Display]
-
-Design Process
-
-1. Requirements Analysis: Identify UART communication parameters, such as baud rate and data format (8 data bits, no parity, 1 stop bit - 8N1). Choose a suitable display device (7-segment or LCD).
-
-
-2. Hardware Setup: Select the VSDSquadron FPGA mini as the platform. Establish a pipeline consisting of a UART receiver, data decoder, and display driver.
-
-
-3. UART Receiver Implementation: Develop the UART module in Verilog or VHDL to receive data, convert it into parallel format, and ensure timing accuracy with start bit detection and bit sampling.
-
-
-4. Data Decoding and Display Logic: Translate ASCII input into binary or segment patterns, which are then displayed using a controller. Integrate all components into a top-level module.
-
-
-5. Testing and Validation: Connect the FPGA to a PC via a USB-to-UART converter. Use a serial terminal application (Docklight) to send data and verify real-time display updates.
-
-
-
-Theme 2: UART-Controlled Actuator System using FPGA
-
-Project Overview
-
-This project aims to develop an FPGA-based system that receives control commands via UART and operates actuators like LEDs, motors, or relays. The primary objective is to interpret serial command strings and trigger the corresponding physical actions through FPGA GPIO pins, making it useful for automation and embedded prototyping.
-
-Objectives
-
-Implement a UART receiver on the FPGA.
-
-Decode control commands (e.g., 'LED ON', 'MOTOR OFF').
-
-Develop an FSM for command-based GPIO control.
-
-Integrate and test actuators like LEDs, relays, or motors.
-
-Enable real-time command execution through a serial interface.
-
-
-System Requirements
-
-Hardware:
-
-VSDSquadron FPGA mini
-
-Actuators: LEDs, relay module, DC motor with driver
-
-UART interface via FTDI USB-to-Serial module
-
-Breadboard and wires
-
-
-Software:
-
-Ubuntu
-
-Docklight
-
-
-Functional Description
-
-1. Setup and Verification: Test the FPGA board with basic LED blinking to verify correct pin mapping.
-
-
-2. UART Receiver Development: Implement a UART module to capture serial data with accurate baud rate handling and bit synchronization.
-
-
-3. Command Decoding Logic: Develop an FSM to recognize valid command strings and generate control signals accordingly.
-
-
-4. Actuator Control: Integrate GPIO control based on parsed commands, driving LEDs, relays, or motors.
-
-
-5. Testing and Validation: Send control commands through a serial terminal and verify actuator responses in real time.
-
-
-
-Architecture Diagram
-
-[PC/Microcontroller] -> [UART TX] -> [FPGA UART RX] -> [Command Decoder (FSM)] -> [GPIO Control] -> [Actuators: LEDs/Motors/Relays]
+##FPGA-Based UART-Controlled Actuator System
+---
+Overview:
+
+Develop a system where the FPGA receives control commands via UART to operates LEDs. This project focuses on decoding serial commands and translating them into physical actions.
+
+Working:
+---
+
+Three different leds are driven by uart commands.
+Commands are sent from DOCKLIGHT software
+When the data is transmitted to fpga through UART, different leds get turned ON in a order. when each command is given each led will ON.
+Codes: These are the top.v and uart_trx.v codes used:
+
+`include "uart_trx.v"
+
+module top (
+
+input clk,
+input uartrx,
+output [2:0] rgb
+);
+
+wire [7:0] rxbyte;
+
+wire received;
+
+reg [2:0] rgb_reg = 3'b001; // Start with RED
+assign rgb = rgb_reg;
+
+uart_rx_8n1 uart_inst (
+    .clk(clk),
+    .rx(uartrx),
+    .rxbyte(rxbyte),
+    .received(received)
+);
+
+always @(posedge clk) begin
+    if (received) begin
+        // Cycle through RED → GREEN → BLUE → RED...
+        case (rgb_reg)
+            3'b001: rgb_reg <= 3'b010; // RED → GREEN
+            3'b010: rgb_reg <= 3'b100; // GREEN → BLUE
+            3'b100: rgb_reg <= 3'b001; // BLUE → RED
+            default: rgb_reg <= 3'b001; // fallback to RED
+        endcase
+        end
+        end
+        endmodule
+module uart_rx_8n1 (
+
+input clk,
+input rx,
+output reg [7:0] rxbyte = 0,
+output reg received = 0
+);
+
+reg [3:0] bitindex = 0;
+reg [7:0] data = 0;
+reg [12:0] clkcount = 0;
+reg busy = 0;
+reg rx_sync = 1;
+
+parameter BAUD_TICKS = 5208;  // 50 MHz / 9600
+
+always @(posedge clk) begin
+    rx_sync <= rx;
+
+    if (!busy) begin
+        received <= 0;
+        if (rx_sync == 0) begin  // start bit
+            busy <= 1;
+            clkcount <= BAUD_TICKS / 2;
+            bitindex <= 0;
+        end
+    end else begin
+        if (clkcount == 0) begin
+            clkcount <= BAUD_TICKS;
+            if (bitindex < 8) begin
+                data[bitindex] <= rx_sync;
+                bitindex <= bitindex + 1;
+            end else if (bitindex == 8) begin
+                rxbyte <= data;
+                received <= 1;
+                busy <= 0;
+            end
+        end else begin
+            clkcount <= clkcount - 1;
+        end
+    end
+end
+endmodule
+## FPGA-Based UART-Controlled Display System
+---
+Overview:
+
+Design a system where the FPGA receives data via UART and displays it on an output device, such as a 7-segment display or an LCD. This project emphasizes real-time data reception and visualization.
+
+Working:
+---
+
+A segment display is connected to the FPGA board.
+Commands are sent from DOCKLIGHT software to the FPGA.
+When the data is transmitted to fpga through UART, the numbers increment in the seven segment display for each command.
+CODE: These are the top.v and uart_trx.v codes used:
+
+`include "uart_trx.v"
+
+module top (
+
+input clk,
+input uartrx,
+output [6:0] seg
+);
+
+wire [7:0] rxbyte;
+wire received;
+
+reg [6:0] seg_reg;
+assign seg = seg_reg;
+
+uart_rx_8n1 uart_inst (
+    .clk(clk),
+    .rx(uartrx),
+    .rxbyte(rxbyte),
+    .received(received)
+);
+
+always @(posedge clk) begin
+    if (received) begin
+        case (rxbyte)
+            "0": seg_reg <= 7'b1111110;
+            "1": seg_reg <= 7'b0110000;
+            "2": seg_reg <= 7'b1101101;
+            "3": seg_reg <= 7'b1111001;
+            "4": seg_reg <= 7'b0110011;
+            "5": seg_reg <= 7'b1011011;
+            "6": seg_reg <= 7'b1011111;
+            "7": seg_reg <= 7'b1110000;
+            "8": seg_reg <= 7'b1111111;
+            "9": seg_reg <= 7'b1111011;
+            default: seg_reg <= 7'b0000001; // Show '-' for invalid input
+        endcase
+    end
+end
+endmodule
+
+module uart_rx_8n1 (
+
+input clk,
+input rx,
+output reg [7:0] rxbyte = 0,
+output reg received = 0
+);
+
+reg [3:0] bitindex = 0;
+reg [7:0] data = 0;
+reg [12:0] clkcount = 0;
+reg busy = 0;
+reg rx_sync = 1;
+
+parameter BAUD_TICKS = 5208;  // 50 MHz / 9600
+
+always @(posedge clk) begin
+    rx_sync <= rx;
+
+    if (!busy) begin
+        received <= 0;
+        if (rx_sync == 0) begin  // start bit
+            busy <= 1;
+            clkcount <= BAUD_TICKS / 2;
+            bitindex <= 0;
+        end
+    end else begin
+        if (clkcount == 0) begin
+            clkcount <= BAUD_TICKS;
+            if (bitindex < 8) begin
+                data[bitindex] <= rx_sync;
+                bitindex <= bitindex + 1;
+            end else if (bitindex == 8) begin
+                rxbyte <= data;
+                received <= 1;
+                busy <= 0;
+            end
+        end else begin
+            clkcount <= clkcount - 1;
+        end
+    end
+end
+endmodule
